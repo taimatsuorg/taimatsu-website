@@ -1,0 +1,205 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../ProjectCard.astro';
+import { projects } from '../../data/projects';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const whyItems = [
+  { title: t('home.why.1.title'), desc: t('home.why.1.desc') },
+  { title: t('home.why.2.title'), desc: t('home.why.2.desc') },
+  { title: t('home.why.3.title'), desc: t('home.why.3.desc') },
+];
+
+const terminalLines = [
+  { t: 'cmd', text: 'ls -la ~/projects' },
+  { t: 'out', text: 'drwxr-xr-x  novon.im           ', suffix: '[LIVE]', suffixCls: 'text-phosphor' },
+  { t: 'out', text: 'drwxr-xr-x  serverless.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
+  { t: 'out', text: 'drwxr-xr-x  infrastructure.im  ', suffix: '[SOON]', suffixCls: 'text-amberish' },
+  { t: 'out', text: 'drwxr-xr-x  containers.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
+  { t: 'cmd', text: './deploy --everything --now' },
+  { t: 'out', text: '✓ zero config   ✓ zero yaml   ✓ zero regrets' },
+  { t: 'cmd', text: 'curl -s novon.im/api/health' },
+  { t: 'out', text: '{"status":"ok","uptime":"99.99%"}', cls: 'text-phosphor' },
+];
+---
+
+<Base
+  title="taimatsu"
+  lang={lang}
+  description={lang === 'zh'
+    ? 'taimatsu — 开发者基础设施工作室：Serverless API 聚合、多云一键部署、容器管理与 Git 博客平台。'
+    : 'taimatsu — a developer infrastructure studio: serverless API hub, one-click multi-cloud deployment, container management and Git-based blogging.'}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="grid-bg absolute inset-0"></div>
+    <div class="relative mx-auto max-w-5xl px-4 pb-16 pt-20 sm:px-6 sm:pt-28">
+      <div class="text-xs text-muted">
+        <span class="text-phosphor">~</span>/taimatsu — whoami
+      </div>
+
+      <h1 class="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-6xl">
+        build<span class="text-phosphor glow">.</span> deploy<span class="text-phosphor glow">.</span>
+        ship<span class="text-phosphor glow">.</span>
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-sm leading-7 text-muted sm:text-base">
+        {t('home.intro')}
+      </p>
+
+      <!-- terminal window -->
+      <div class="mt-12 overflow-hidden rounded-lg border border-line bg-panel shadow-[0_0_80px_-20px_rgb(0_255_157/0.15)]">
+        <div class="flex items-center gap-2 border-b border-line bg-panel-2 px-4 py-2.5">
+          <span class="h-3 w-3 rounded-full bg-danger"></span>
+          <span class="h-3 w-3 rounded-full bg-amberish"></span>
+          <span class="h-3 w-3 rounded-full bg-phosphor"></span>
+          <span class="ml-3 text-xs text-dim">{t('home.terminal.dir')}</span>
+        </div>
+        <div id="term-body" class="space-y-2 whitespace-pre-wrap px-4 py-5 text-xs leading-6 sm:text-sm">
+          {/* 无 JS 时的静态回退内容，脚本启动后会清空并播放动画 */}
+          <div><span class="text-phosphor">$ </span><span class="text-fg">ls -la ~/projects</span></div>
+          {terminalLines.slice(1, 5).map((line) => (
+            <div class="text-muted">
+              {line.text}
+              <span class={line.suffixCls}>{line.suffix}</span>
+            </div>
+          ))}
+          <div><span class="text-phosphor">$ </span><span class="blink text-phosphor">▊</span></div>
+        </div>
+        <script is:inline define:vars={{ terminalLines }}>
+          {
+            const body = document.getElementById('term-body');
+            const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+            const cursorEl = () => {
+              const c = document.createElement('span');
+              c.className = 'blink text-phosphor';
+              c.textContent = '▊';
+              return c;
+            };
+
+            const promptRow = () => {
+              const r = document.createElement('div');
+              const p = document.createElement('span');
+              p.className = 'text-phosphor';
+              p.textContent = '$ ';
+              r.appendChild(p);
+              return r;
+            };
+
+            const appendOut = (line) => {
+              const r = document.createElement('div');
+              r.className = line.cls || 'text-muted';
+              r.textContent = line.text;
+              if (line.suffix) {
+                const s = document.createElement('span');
+                s.className = line.suffixCls || '';
+                s.textContent = line.suffix;
+                r.appendChild(s);
+              }
+              body.appendChild(r);
+            };
+
+            const typeCmd = async (text) => {
+              const r = promptRow();
+              const typed = document.createElement('span');
+              typed.className = 'text-fg';
+              const cur = cursorEl();
+              r.appendChild(typed);
+              r.appendChild(cur);
+              body.appendChild(r);
+              for (const ch of text) {
+                typed.textContent += ch;
+                await sleep(35 + Math.random() * 55);
+              }
+              cur.remove();
+              await sleep(400);
+            };
+
+            (async () => {
+              for (;;) {
+                body.innerHTML = '';
+                for (const line of terminalLines) {
+                  if (line.t === 'cmd') {
+                    await typeCmd(line.text);
+                  } else {
+                    appendOut(line);
+                    await sleep(150);
+                  }
+                }
+                const idle = promptRow();
+                idle.appendChild(cursorEl());
+                body.appendChild(idle);
+                await sleep(7000);
+              }
+            })();
+          }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="border-t border-line bg-panel/50">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
+      <div class="flex items-end justify-between">
+        <div>
+          <div class="text-xs text-muted"><span class="text-phosphor">~</span>/projects</div>
+          <h2 class="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
+            <span class="text-phosphor">##</span> {t('home.projects.title')}
+          </h2>
+        </div>
+        <div class="hidden text-xs text-dim sm:block">{t('home.projects.count')}</div>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {projects.map((project, i) => <ProjectCard project={project} index={i + 1} lang={lang} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+      <div class="text-xs text-muted"><span class="text-phosphor">~</span>/why</div>
+      <h2 class="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
+        <span class="text-phosphor">##</span> {t('home.why.title')}
+      </h2>
+      <div class="mt-10 grid gap-5 sm:grid-cols-3">
+        {
+          whyItems.map((item, i) => (
+            <div class="rounded-lg border border-line bg-panel p-5">
+              <div class="text-xs text-dim">[{String(i + 1).padStart(2, '0')}]</div>
+              <h3 class="mt-2 font-display text-base font-bold text-white">
+                {item.title}
+              </h3>
+              <p class="mt-2 text-xs leading-6 text-muted">{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO STRIP -->
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <div class="rounded-lg border border-dashed border-line-bright p-6 sm:p-8">
+        <div class="text-xs text-dim">{t('home.manifesto.label')}</div>
+        <p class="mt-4 max-w-3xl text-sm leading-8 text-fg">
+          {t('home.manifesto.p1')}<span class="text-phosphor">{t('home.manifesto.cmd1')}</span>{t('home.manifesto.p2')}<span class="text-phosphor">{t('home.manifesto.cmd2')}</span>{t('home.manifesto.p3')}<span class="text-phosphor">{t('home.manifesto.cmd3')}</span>{t('home.manifesto.p4')}
+        </p>
+        <div class="mt-6 text-xs text-muted">
+          <span class="text-phosphor">$</span> cat /etc/motd —— "{t('home.motd')}"
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

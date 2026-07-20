@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: "Space Grotesk", "JetBrains Mono", ui-sans-serif, system-ui, sans-serif;
+
+  --color-void: #050505;
+  --color-panel: #0a0a0a;
+  --color-panel-2: #101010;
+  --color-line: #1f1f1f;
+  --color-line-bright: #2e2e2e;
+  --color-fg: #d4d4d4;
+  --color-muted: #737373;
+  --color-dim: #404040;
+  --color-phosphor: #00ff9d;
+  --color-phosphor-dim: #00c97b;
+  --color-amberish: #ffb224;
+  --color-danger: #ff5f56;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-phosphor);
+  color: #000;
+}
+
+/* ---- geek decorations ---- */
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 100%);
+}
+
+.glow {
+  text-shadow: 0 0 12px rgb(0 255 157 / 0.55), 0 0 42px rgb(0 255 157 / 0.25);
+}
+
+.blink {
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(0 255 157 / 0.5); }
+  50% { box-shadow: 0 0 0 6px rgb(0 255 157 / 0); }
+}
+
+.card-hover {
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  border-color: rgb(0 255 157 / 0.45);
+  box-shadow: 0 0 0 1px rgb(0 255 157 / 0.2), 0 8px 40px -12px rgb(0 255 157 / 0.15);
+  transform: translateY(-2px);
+}
+
+/* markdown / prose content */
+.prose-term h1,
+.prose-term h2,
+.prose-term h3 {
+  font-family: var(--font-display);
+  color: #fff;
+  margin-top: 2.2em;
+  margin-bottom: 0.7em;
+  font-weight: 700;
+}
+.prose-term h1 { font-size: 1.75rem; }
+.prose-term h2 { font-size: 1.3rem; }
+.prose-term h2::before { content: "## "; color: var(--color-phosphor); }
+.prose-term h3 { font-size: 1.05rem; }
+.prose-term h3::before { content: "### "; color: var(--color-muted); }
+.prose-term p { margin: 1em 0; line-height: 1.8; color: var(--color-fg); }
+.prose-term a { color: var(--color-phosphor); text-decoration: underline; text-underline-offset: 3px; }
+.prose-term ul, .prose-term ol { margin: 1em 0; padding-left: 1.4em; line-height: 1.8; }
+.prose-term ul li { list-style: none; position: relative; }
+.prose-term ul li::before { content: "›"; position: absolute; left: -1em; color: var(--color-phosphor); }
+.prose-term ol li { list-style: decimal; }
+.prose-term code {
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-line);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: var(--color-phosphor);
+}
+.prose-term pre {
+  background: var(--color-panel) !important;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  padding: 1.1em 1.3em;
+  overflow-x: auto;
+  margin: 1.4em 0;
+}
+.prose-term pre code { background: none; border: none; padding: 0; color: inherit; }
+.prose-term blockquote {
+  border-left: 2px solid var(--color-phosphor);
+  padding-left: 1em;
+  color: var(--color-muted);
+  margin: 1.4em 0;
+}
+.prose-term hr { border-color: var(--color-line); margin: 2.5em 0; }
+.prose-term strong { color: #fff; }

@@ -1,0 +1,16 @@
+---
+import BlogPost from '../../components/pages/BlogPost.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ id }) => id.startsWith('zh/'));
+  return posts.map((post) => ({
+    params: { id: post.id.replace(/^zh\//, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BlogPost post={post} lang="zh" />

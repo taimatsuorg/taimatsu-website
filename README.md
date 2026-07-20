@@ -1,48 +1,57 @@
-# Tremor – Database
+# taimatsu
 
-`Database` is a website template from [Tremor](https://tremor.so). It's built
-using [`Tremor Raw`](https://raw.tremor.so/docs/getting-started/installation)
-and [Next.js](https://nextjs.org).
+> ▲ 独立开发者实验室官网 —— 黑底极客风格，基于 [Astro](https://astro.build) 构建。
 
-## Getting started
+介绍以下项目：
 
-1. Install the dependencies. We recommend using pnpm. If you want to use `npm`,
-   just replace `pnpm` with `npm`.
+| 项目 | 说明 | 状态 |
+| --- | --- | --- |
+| [novon.im](https://novon.im) | 基于 GitHub 的博客平台，导入仓库即可部署 | ✅ LIVE |
+| serverless.im | 基于 Serverless 的实用 API 聚合平台 | 🚧 敬请期待 |
+| infrastructure.im | 云基础资源管理，一键部署服务/应用/游戏服务器 | 🚧 敬请期待 |
+| containers.im | 一站式容器管理工具（类似 Coolify） | 🚧 敬请期待 |
+
+## 技术栈
+
+- [Astro 7](https://astro.build) —— 静态站点生成（内置 i18n 路由：中文默认 `/`，英文 `/en`）
+- [Tailwind CSS 4](https://tailwindcss.com) —— 样式（`@tailwindcss/vite`）
+- Astro Content Collections —— Blog（Markdown，按语言分目录）
+- [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) —— 站点地图
+
+## 本地开发
 
 ```bash
-pnpm install
+npm install
+npm run dev      # http://localhost:4321
 ```
 
-2. Then, start the development server:
+## 构建与预览
 
 ```bash
-pnpm run dev
+npm run build    # 输出到 dist/
+npm run preview
 ```
 
-3. Visit [http://localhost:3000](http://localhost:3000) in your browser to view
-   the template.
+## 目录结构
 
-## Notes
+```
+src/
+├── components/       # Nav / Footer / ProjectCard / pages（双语共享页面组件）
+├── content/blog/     # 博客文章（zh/ 中文，en/ 英文）
+├── content.config.ts
+├── data/projects.ts  # 项目数据（双语）
+├── i18n/utils.ts     # 语言配置、UI 文案字典、路由辅助
+├── layouts/          # Base / Legal 布局
+├── pages/            # 中文页面（根路径）+ en/ 英文页面
+└── styles/global.css
+```
 
-This project uses
-[`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to
-automatically optimize and load Inter, a custom Google Font.
+## 多语言
 
-This project uses
-[`Tremor Raw`](https://raw.tremor.so/docs/getting-started/installation)
-components for the UI.
+- 中文为默认语言（路径无前缀），英文位于 `/en` 前缀下；导航栏右侧可一键切换。
+- UI 文案集中在 `src/i18n/utils.ts` 的 `ui` 字典中。
+- 写博客：在 `src/content/blog/zh/` 与 `src/content/blog/en/` 分别新增同名 `.md` 文件，带 frontmatter（`title` / `description` / `pubDate` / `tags`）。
 
 ## License
 
-This site template is a commercial product and is licensed under the
-[Tremor License](https://blocks.tremor.so/license).
-
-## Learn more
-
-For a deeper understanding of the technologies used in this template, check out
-the resources listed below:
-
-- [Tailwind CSS](https://tailwindcss.com) - A utility-first CSS framework
-- [Next.js](https://nextjs.org/docs) - Next.js documentation
-- [Radix UI](https://www.radix-ui.com) - Radix UI Website
-- [Shiki](https://shiki.style) - Shiki Website (Syntax highlighter)
+MIT

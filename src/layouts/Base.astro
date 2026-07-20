@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { alternateLocalePath, type Lang } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+}
+
+const {
+  title,
+  description = 'taimatsu — a developer infrastructure studio. novon.im / serverless.im / infrastructure.im / containers.im.',
+  lang,
+} = Astro.props;
+
+const fullTitle = title === 'taimatsu' ? 'taimatsu — build. deploy. ship.' : `${title} — taimatsu`;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const zhUrl = new URL(alternateLocalePath(Astro.url.pathname, 'zh'), Astro.site ?? Astro.url.origin);
+const enUrl = new URL(alternateLocalePath(Astro.url.pathname, 'en'), Astro.site ?? Astro.url.origin);
+---
+
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#050505" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={zhUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+    <title>{fullTitle}</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Nav lang={lang} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
