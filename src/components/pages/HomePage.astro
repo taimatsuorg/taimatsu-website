@@ -19,14 +19,14 @@ const whyItems = [
 
 const terminalLines = [
   { t: 'cmd', text: 'ls -la ~/projects' },
-  { t: 'out', text: 'drwxr-xr-x  novon.im           ', suffix: '[LIVE]', suffixCls: 'text-phosphor' },
+  { t: 'out', text: 'drwxr-xr-x  novon.im           ', suffix: '[SOON]', suffixCls: 'text-amberish' },
   { t: 'out', text: 'drwxr-xr-x  serverless.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
   { t: 'out', text: 'drwxr-xr-x  infrastructure.im  ', suffix: '[SOON]', suffixCls: 'text-amberish' },
   { t: 'out', text: 'drwxr-xr-x  containers.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
   { t: 'cmd', text: './deploy --everything --now' },
   { t: 'out', text: '✓ zero config   ✓ zero yaml   ✓ zero regrets' },
-  { t: 'cmd', text: 'curl -s novon.im/api/health' },
-  { t: 'out', text: '{"status":"ok","uptime":"99.99%"}', cls: 'text-phosphor' },
+  { t: 'cmd', text: 'novon publish ./hello.md' },
+  { t: 'out', text: '{"status":"coming_soon","eta":"stay_tuned"}', cls: 'text-amberish' },
 ];
 ---
 
@@ -34,8 +34,8 @@ const terminalLines = [
   title="taimatsu"
   lang={lang}
   description={lang === 'zh'
-    ? 'taimatsu — 开发者基础设施工作室：Serverless API 聚合、多云一键部署、容器管理与 Git 博客平台。'
-    : 'taimatsu — a developer infrastructure studio: serverless API hub, one-click multi-cloud deployment, container management and Git-based blogging.'}
+    ? 'taimatsu — 开发者基础设施工作室：Serverless API 聚合、多云一键部署、容器管理与博客托管服务。'
+    : 'taimatsu — a developer infrastructure studio: serverless API hub, one-click multi-cloud deployment, container management and blog hosting.'}
 >
   <!-- HERO -->
   <section class="relative overflow-hidden">

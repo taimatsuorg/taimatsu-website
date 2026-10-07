@@ -1,53 +1,53 @@
 ---
 layout: ../layouts/Legal.astro
-title: 隐私政策
-description: taimatsu 隐私政策 —— 我们如何收集、使用和保护你的信息。
+title: Privacy Policy
+description: taimatsu Privacy Policy — how we collect, use and protect your information.
 updated: 2025-01-20
 ---
 
-taimatsu（下称"我们"）尊重并保护你的隐私。本政策说明我们在你访问本网站及使用我们的服务（包括 novon.im 及后续上线的 serverless.im、infrastructure.im、containers.im）时，如何收集、使用、存储和保护你的信息。
+taimatsu ("we") respects and protects your privacy. This policy explains how we collect, use, store and protect your information when you visit this website and use our services (including novon.im and the upcoming serverless.im, infrastructure.im and containers.im).
 
-## 我们收集的信息
+## Information We Collect
 
-- **你主动提供的信息**：注册账户时提供的电子邮箱、用户名；通过 GitHub OAuth 授权时获得的基本资料（用户名、头像、公开邮箱）与仓库访问权限。
-- **自动收集的信息**：访问日志（IP 地址、浏览器类型、访问时间、引用页面）、设备信息与 Cookie，用于安全审计与服务改进。
-- **你创建的内容**：你在我们平台上发布或存储的内容（如博客文章、部署配置）。
+- **Information you provide**: email address and username when registering; basic profile data (username, avatar, public email) and repository access obtained via GitHub OAuth authorization.
+- **Automatically collected information**: access logs (IP address, browser type, timestamps, referring pages), device information and cookies, used for security auditing and service improvement.
+- **Content you create**: content you publish or store on our platforms (such as blog posts and deployment configurations).
 
-## 信息的使用
+## How We Use Information
 
-我们仅将收集的信息用于：
+We use the collected information only to:
 
-1. 提供、维护和改进我们的服务；
-2. 完成你发起的操作（例如从你授权的 GitHub 仓库读取内容并部署博客）；
-3. 账户安全、异常检测与滥用防护；
-4. 在获得你同意的前提下，发送与服务相关的通知。
+1. Provide, maintain and improve our services;
+2. Perform actions you initiate (e.g. reading content from your authorized GitHub repositories and deploying your blog);
+3. Account security, anomaly detection and abuse prevention;
+4. Send service-related notices with your consent.
 
-我们不会出售你的个人信息，也不会将其用于与你所使用功能无关的广告定向。
+We do not sell your personal information, nor do we use it for ad targeting unrelated to the features you use.
 
-## Cookie 与本地存储
+## Cookies & Local Storage
 
-我们使用必要的 Cookie 维持登录状态与偏好设置。你可以通过浏览器设置拒绝 Cookie，但部分功能可能因此不可用。
+We use strictly necessary cookies to maintain login state and preferences. You can refuse cookies via your browser settings, though some features may become unavailable.
 
-## 第三方服务
+## Third-Party Services
 
-我们可能使用以下类型的第三方服务：云服务与 CDN 提供商、GitHub（OAuth 与仓库 API）、隐私友好的访问统计工具。这些第三方仅在其提供服务所必需的范围内处理数据，并受其自身隐私政策约束。
+We may use the following categories of third-party services: cloud and CDN providers, GitHub (OAuth and repository APIs), and privacy-friendly analytics. These third parties process data only to the extent necessary to provide their services and are governed by their own privacy policies.
 
-## 数据的存储与保护
+## Data Storage & Protection
 
-我们采用业界合理的安全措施（传输加密、访问控制、最小权限原则）保护你的信息。数据保留期限不超过实现本政策所述目的所必需的时间；当你删除账户或内容时，我们将在合理期限内删除相关数据，法律要求保留的除外。
+We apply industry-standard safeguards (encryption in transit, access control, least-privilege principles) to protect your information. Data is retained no longer than necessary for the purposes described in this policy; when you delete your account or content, we delete the related data within a reasonable period, except where retention is required by law.
 
-## 你的权利
+## Your Rights
 
-你有权访问、更正、删除你的个人信息，撤回授权（如解除 GitHub 授权），以及注销账户。如需行使上述权利，请通过下方联系方式与我们取得联系。
+You have the right to access, correct and delete your personal information, withdraw authorizations (such as disconnecting GitHub), and close your account. To exercise these rights, contact us via the channels below.
 
-## 未成年人
+## Children
 
-我们的服务不面向 13 周岁以下儿童。如果我们发现收集了儿童的个人信息，将尽快删除。
+Our services are not directed at children under 13. If we discover that we have collected personal information from a child, we will delete it promptly.
 
-## 政策变更
+## Changes to This Policy
 
-我们可能不时更新本政策。重大变更将通过网站公告或邮件通知。更新后的政策自公布之日起生效。
+We may update this policy from time to time. Material changes will be announced on the website or via email. Updated policies take effect upon publication.
 
-## 联系我们
+## Contact Us
 
-如对本隐私政策有任何疑问，请通过 GitHub 上的公开渠道或本网站页脚提供的方式与我们联系。
+If you have any questions about this Privacy Policy, reach out through our public channels on GitHub or the methods listed in this site's footer.

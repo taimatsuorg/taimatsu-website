@@ -5,7 +5,7 @@ export const languages = {
 
 export type Lang = keyof typeof languages;
 
-export const defaultLang: Lang = 'zh';
+export const defaultLang: Lang = 'en';
 
 export const ui = {
   zh: {
@@ -28,7 +28,7 @@ export const ui = {
       'taimatsu 是一家专注于开发者基础设施的独立软件工作室。我们以 Serverless、容器与 Git 工作流为基石，构建覆盖 API 服务、云资源管理、容器运维与内容发布的产品矩阵，帮助独立开发者与中小团队以更低的成本、更高的效率，完成从开发到上线的全链路交付。',
     'home.terminal.dir': 'taimatsu@void: ~/projects',
     'home.projects.title': '产品矩阵',
-    'home.projects.count': 'total: 4 // live: 1',
+    'home.projects.count': 'total: 4 // live: 0',
     'home.why.title': '为什么选择 taimatsu',
     'home.why.1.title': '成本可控',
     'home.why.1.desc': '按量计费与慷慨的免费额度，让每一分预算都花在业务本身，而不是闲置的服务器上。',
@@ -83,7 +83,7 @@ export const ui = {
       'taimatsu is an independent software studio focused on developer infrastructure. Built on serverless, containers and Git workflows, our product suite spans API services, cloud resource management, container operations and content publishing — helping indie developers and growing teams ship from code to production faster, at a fraction of the cost.',
     'home.terminal.dir': 'taimatsu@void: ~/projects',
     'home.projects.title': 'The Product Suite',
-    'home.projects.count': 'total: 4 // live: 1',
+    'home.projects.count': 'total: 4 // live: 0',
     'home.why.title': 'Why taimatsu',
     'home.why.1.title': 'Cost-efficient',
     'home.why.1.desc': 'Pay-as-you-go pricing and generous free tiers — every cent of your budget goes to your business, not idle servers.',
@@ -137,10 +137,10 @@ export function localePath(lang: Lang, path: string): string {
 
 /** Given the current pathname, return the path for the *other* locale. */
 export function alternateLocalePath(pathname: string, target: Lang): string {
-  const stripped = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+  const stripped = pathname.replace(/^\/zh(?=\/|$)/, '') || '/';
   return localePath(target, stripped);
 }
 
 export function getLangFromUrl(pathname: string): Lang {
-  return pathname.startsWith('/en/') || pathname === '/en' ? 'en' : 'zh';
+  return pathname.startsWith('/zh/') || pathname === '/zh' ? 'zh' : 'en';
 }

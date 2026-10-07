@@ -1,51 +1,51 @@
 ---
 layout: ../layouts/Legal.astro
-title: 服务条款
-description: taimatsu 服务条款 —— 使用本网站及旗下服务前请阅读。
+title: Terms of Service
+description: taimatsu Terms of Service — please read before using this website and our services.
 updated: 2025-01-20
 ---
 
-欢迎使用 taimatsu。使用本网站及我们的服务（包括 novon.im 及后续上线的 serverless.im、infrastructure.im、containers.im，统称"服务"），即表示你同意遵守以下条款。
+Welcome to taimatsu. By using this website and our services (including novon.im and the upcoming serverless.im, infrastructure.im and containers.im, collectively the "Services"), you agree to the following terms.
 
-## 账户与授权
+## Accounts & Authorization
 
-- 你需通过 GitHub 等第三方账户注册并登录。你应保证账户信息真实、妥善保管凭据，并对账户下的所有活动负责。
-- 你授予我们的第三方权限（如 GitHub 仓库访问权）仅用于提供你所使用的功能，你可随时在第三方平台撤回授权。
+- You register and sign in via third-party accounts such as GitHub. You must provide accurate information, keep your credentials secure, and are responsible for all activity under your account.
+- Third-party permissions you grant us (such as GitHub repository access) are used solely to provide the features you use, and you may revoke them at any time on the third-party platform.
 
-## 可接受的使用
+## Acceptable Use
 
-你同意不会利用服务从事以下行为：
+You agree not to use the Services to:
 
-1. 违反任何适用的法律法规；
-2. 侵犯他人的知识产权、隐私权或其他合法权益；
-3. 发布恶意软件、钓鱼内容，或对服务进行攻击、扫描、滥用资源；
-4. 部署或传播垃圾信息、欺诈内容或其他有害内容；
-5. 干扰服务的正常运行或其他用户的正常使用。
+1. Violate any applicable laws or regulations;
+2. Infringe the intellectual property, privacy or other legitimate rights of others;
+3. Publish malware or phishing content, or attack, scan or abuse the Services' resources;
+4. Deploy or distribute spam, fraudulent or otherwise harmful content;
+5. Interfere with the normal operation of the Services or other users' normal use.
 
-我们有权对违反上述规定的账户采取限制、暂停或终止措施。
+We may restrict, suspend or terminate accounts that violate the above.
 
-## 你的内容
+## Your Content
 
-- 你保留对你所创建内容的全部权利。你授予我们为提供服务所必需的有限许可（存储、处理、展示与传输）。
-- 你声明并保证你拥有发布相关内容的合法权利，且内容不违反本条款。
+- You retain all rights to the content you create. You grant us a limited license to store, process, display and transmit it only as necessary to provide the Services.
+- You represent and warrant that you have the legal right to publish your content and that it does not violate these terms.
 
-## 服务的提供与变更
+## Service Provision & Changes
 
-- 部分服务可能处于测试阶段，我们不对其可用性、连续性作任何保证。
-- 我们可能随时修改、暂停或终止部分或全部服务，并将尽可能提前通知。
+- Some Services may be in beta; we make no guarantees regarding their availability or continuity.
+- We may modify, suspend or terminate part or all of the Services at any time, with advance notice where reasonably possible.
 
-## 免责声明
+## Disclaimer
 
-服务按"现状"提供。在法律允许的最大范围内，我们不对服务的适销性、特定用途适用性作任何明示或默示的保证，也不对因使用或无法使用服务造成的间接损失承担责任。
+The Services are provided "as is". To the maximum extent permitted by law, we make no warranties, express or implied, of merchantability or fitness for a particular purpose, and are not liable for indirect damages arising from the use or inability to use the Services.
 
-## 责任限制
+## Limitation of Liability
 
-对于因服务引起的任何直接损失，我们的累计赔偿责任不超过你在损失发生前 12 个月内就该服务实际支付的费用（免费服务情形下为零）。
+For any direct damages arising from the Services, our aggregate liability shall not exceed the amount you actually paid for the relevant Service in the 12 months preceding the event (zero in the case of free Services).
 
-## 条款变更与适用法律
+## Changes & Governing Law
 
-我们可能不时修订本条款，修订后的条款自公布之日起生效。继续使用服务即视为接受修订后的条款。本条款的解释与争议解决适用服务运营方所在地的法律法规。
+We may revise these terms from time to time; revised terms take effect upon publication. Continued use of the Services constitutes acceptance of the revised terms. The interpretation of these terms and dispute resolution are governed by the laws of the jurisdiction where the service operator is located.
 
-## 联系我们
+## Contact Us
 
-如对本条款有任何疑问，请通过 GitHub 上的公开渠道或本网站页脚提供的方式与我们联系。
+If you have any questions about these terms, reach out through our public channels on GitHub or the methods listed in this site's footer.

@@ -8,8 +8,8 @@ export default defineConfig({
   site: 'https://taimatsu.dev',
   integrations: [sitemap()],
   i18n: {
-    defaultLocale: 'zh',
-    locales: ['zh', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
     routing: {
       prefixDefaultLocale: false,
     },
