@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { render, type CollectionEntry } from 'astro:content';
+import { Badge } from '../ui/badge';
+import { buttonVariants } from '../ui/button';
+import { Separator } from '../ui/separator';
+import { ArrowLeftIcon } from '../icons';
 import { localePath, useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
@@ -19,28 +23,28 @@ function formatDate(date: Date) {
 
 <Base title={post.data.title} description={post.data.description} lang={lang}>
   <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-    <a href={localePath(lang, '/blog')} class="text-xs text-muted transition-colors hover:text-phosphor">{t('blog.back')}</a>
+    <a href={localePath(lang, '/blog')} class={buttonVariants({ variant: 'ghost', size: 'sm', className: '-ms-2.5 text-muted-foreground' })}>
+      <ArrowLeftIcon size={14} className="rtl:-scale-x-100" /> {t('blog.back')}
+    </a>
 
-    <header class="mt-8 border-b border-line pb-8">
-      <div class="flex flex-wrap items-center gap-3 text-xs text-dim">
+    <header class="mt-8">
+      <div class="flex flex-wrap items-center gap-2 text-ui-sm text-muted-foreground">
         <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-        {post.data.tags.map((tag) => (
-          <span class="rounded border border-line px-1.5 py-0.5 text-[10px] text-muted">#{tag}</span>
-        ))}
+        {post.data.tags.map((tag) => <Badge variant="outline" size="sm">{tag}</Badge>)}
       </div>
-      <h1 class="mt-4 font-display text-2xl font-bold leading-snug text-white sm:text-3xl">
-        {post.data.title}
-      </h1>
-      <p class="mt-3 text-sm text-muted">{post.data.description}</p>
+      <h1 class="mt-4 font-heading text-3xl font-semibold leading-tight tracking-tight text-balance sm:text-4xl">{post.data.title}</h1>
+      <p class="mt-3 text-base text-muted-foreground">{post.data.description}</p>
     </header>
 
-    <div class="prose-term mt-8 text-sm sm:text-base">
+    <Separator className="my-8" />
+
+    <div class="typeset typeset-reading">
       <Content />
     </div>
 
-    <footer class="mt-16 rounded-lg border border-dashed border-line-bright p-5 text-xs text-muted">
-      <span class="text-phosphor">$</span> {t('blog.eof')}
-      <a href={localePath(lang, '/blog')} class="text-phosphor hover:underline">~/blog</a>
-    </footer>
+    <Separator className="my-12" />
+    <p class="text-ui text-muted-foreground">
+      {t('blog.eof')} <a href={localePath(lang, '/blog')} class="font-medium text-primary hover:underline">{t('nav.blog')}</a>
+    </p>
   </article>
 </Base>

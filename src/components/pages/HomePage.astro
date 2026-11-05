@@ -1,6 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../ProjectCard.astro';
+import Logo from '../Logo.astro';
+import { Badge } from '../ui/badge';
+import { buttonVariants } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { WindowFrame, WindowFrameBar, WindowFrameBody, WindowFrameTitle } from '../ui/window-frame';
+import { ArrowRightIcon } from '../icons';
+import { cn } from '../../lib/utils';
 import { projects } from '../../data/projects';
 import { useTranslations, type Lang } from '../../i18n/utils';
 
@@ -19,14 +26,14 @@ const whyItems = [
 
 const terminalLines = [
   { t: 'cmd', text: 'ls -la ~/projects' },
-  { t: 'out', text: 'drwxr-xr-x  novon.im           ', suffix: '[SOON]', suffixCls: 'text-amberish' },
-  { t: 'out', text: 'drwxr-xr-x  serverless.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
-  { t: 'out', text: 'drwxr-xr-x  infrastructure.im  ', suffix: '[SOON]', suffixCls: 'text-amberish' },
-  { t: 'out', text: 'drwxr-xr-x  containers.im      ', suffix: '[SOON]', suffixCls: 'text-amberish' },
+  { t: 'out', text: 'drwxr-xr-x  novon.im           ', suffix: '[SOON]', suffixCls: 'text-warning' },
+  { t: 'out', text: 'drwxr-xr-x  serverless.im      ', suffix: '[SOON]', suffixCls: 'text-warning' },
+  { t: 'out', text: 'drwxr-xr-x  infrastructure.im  ', suffix: '[SOON]', suffixCls: 'text-warning' },
+  { t: 'out', text: 'drwxr-xr-x  containers.im      ', suffix: '[SOON]', suffixCls: 'text-warning' },
   { t: 'cmd', text: './deploy --everything --now' },
-  { t: 'out', text: '✓ zero config   ✓ zero yaml   ✓ zero regrets' },
+  { t: 'out', text: '✓ zero config   ✓ zero yaml   ✓ zero regrets', cls: 'text-success' },
   { t: 'cmd', text: 'novon publish ./hello.md' },
-  { t: 'out', text: '{"status":"coming_soon","eta":"stay_tuned"}', cls: 'text-amberish' },
+  { t: 'out', text: '{"status":"coming_soon","eta":"stay_tuned"}', cls: 'text-warning' },
 ];
 ---
 
@@ -37,50 +44,49 @@ const terminalLines = [
     ? 'taimatsu — 开发者基础设施工作室：Serverless API 聚合、多云一键部署、容器管理与博客托管服务。'
     : 'taimatsu — a developer infrastructure studio: serverless API hub, one-click multi-cloud deployment, container management and blog hosting.'}
 >
-  <!-- HERO -->
   <section class="relative overflow-hidden">
-    <div class="grid-bg absolute inset-0"></div>
+    <div class="hero-grid pointer-events-none absolute inset-0"></div>
     <div class="relative mx-auto max-w-5xl px-4 pb-16 pt-20 sm:px-6 sm:pt-28">
-      <div class="text-xs text-muted">
-        <span class="text-phosphor">~</span>/taimatsu — whoami
-      </div>
-
-      <h1 class="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-6xl">
-        build<span class="text-phosphor glow">.</span> deploy<span class="text-phosphor glow">.</span>
-        ship<span class="text-phosphor glow">.</span>
+      <Logo size={64} class="text-foreground" />
+      <Badge variant="primary" className="mt-8">{t('home.badge')}</Badge>
+      <h1 class="mt-5 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+        build<span class="text-primary">.</span> deploy<span class="text-primary">.</span> ship<span class="text-primary">.</span>
       </h1>
-
-      <p class="mt-6 max-w-2xl text-sm leading-7 text-muted sm:text-base">
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground">
         {t('home.intro')}
       </p>
+      <div class="mt-8 flex flex-wrap gap-2">
+        <a href="#projects" class={buttonVariants({ size: 'lg' })}>
+          {t('home.cta.projects')}
+          <ArrowRightIcon size={16} className="rtl:-scale-x-100" />
+        </a>
+        <a href={lang === 'zh' ? '/zh/blog' : '/blog'} class={buttonVariants({ variant: 'outline', size: 'lg' })}>
+          {t('home.cta.blog')}
+        </a>
+      </div>
 
-      <!-- terminal window -->
-      <div class="mt-12 overflow-hidden rounded-lg border border-line bg-panel shadow-[0_0_80px_-20px_rgb(0_255_157/0.15)]">
-        <div class="flex items-center gap-2 border-b border-line bg-panel-2 px-4 py-2.5">
-          <span class="h-3 w-3 rounded-full bg-danger"></span>
-          <span class="h-3 w-3 rounded-full bg-amberish"></span>
-          <span class="h-3 w-3 rounded-full bg-phosphor"></span>
-          <span class="ml-3 text-xs text-dim">{t('home.terminal.dir')}</span>
-        </div>
-        <div id="term-body" class="space-y-2 whitespace-pre-wrap px-4 py-5 text-xs leading-6 sm:text-sm">
-          {/* 无 JS 时的静态回退内容，脚本启动后会清空并播放动画 */}
-          <div><span class="text-phosphor">$ </span><span class="text-fg">ls -la ~/projects</span></div>
-          {terminalLines.slice(1, 5).map((line) => (
-            <div class="text-muted">
-              {line.text}
-              <span class={line.suffixCls}>{line.suffix}</span>
-            </div>
-          ))}
-          <div><span class="text-phosphor">$ </span><span class="blink text-phosphor">▊</span></div>
-        </div>
-        <script is:inline define:vars={{ terminalLines }}>
+      <WindowFrame className="mt-14 shadow-raised">
+        <WindowFrameBar>
+          <WindowFrameTitle align="center">{t('home.terminal.dir')}</WindowFrameTitle>
+        </WindowFrameBar>
+        <WindowFrameBody className="bg-background">
+          <div id="term-body" class="min-h-72 space-y-1.5 px-4 py-5 font-mono text-ui-sm leading-6 whitespace-pre-wrap sm:text-ui">
+            <div><span class="text-primary">$ </span><span>ls -la ~/projects</span></div>
+            {terminalLines.slice(1, 5).map((line) => (
+              <div class="text-muted-foreground">{line.text}<span class={line.suffixCls}>{line.suffix}</span></div>
+            ))}
+            <div><span class="text-primary">$ </span><span class="caret text-primary">▊</span></div>
+          </div>
+        </WindowFrameBody>
+      </WindowFrame>
+      <script is:inline define:vars={{ terminalLines }}>
           {
             const body = document.getElementById('term-body');
             const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
             const cursorEl = () => {
               const c = document.createElement('span');
-              c.className = 'blink text-phosphor';
+              c.className = 'caret text-primary';
               c.textContent = '▊';
               return c;
             };
@@ -88,7 +94,7 @@ const terminalLines = [
             const promptRow = () => {
               const r = document.createElement('div');
               const p = document.createElement('span');
-              p.className = 'text-phosphor';
+              p.className = 'text-primary';
               p.textContent = '$ ';
               r.appendChild(p);
               return r;
@@ -96,7 +102,7 @@ const terminalLines = [
 
             const appendOut = (line) => {
               const r = document.createElement('div');
-              r.className = line.cls || 'text-muted';
+              r.className = line.cls || 'text-muted-foreground';
               r.textContent = line.text;
               if (line.suffix) {
                 const s = document.createElement('span');
@@ -110,7 +116,7 @@ const terminalLines = [
             const typeCmd = async (text) => {
               const r = promptRow();
               const typed = document.createElement('span');
-              typed.className = 'text-fg';
+              typed.className = 'text-foreground';
               const cur = cursorEl();
               r.appendChild(typed);
               r.appendChild(cur);
@@ -142,64 +148,53 @@ const terminalLines = [
             })();
           }
         </script>
-      </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="border-t border-line bg-panel/50">
+  <section id="projects" class="scroll-mt-14 border-t border-border bg-muted/40">
     <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-      <div class="flex items-end justify-between">
-        <div>
-          <div class="text-xs text-muted"><span class="text-phosphor">~</span>/projects</div>
-          <h2 class="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
-            <span class="text-phosphor">##</span> {t('home.projects.title')}
-          </h2>
-        </div>
-        <div class="hidden text-xs text-dim sm:block">{t('home.projects.count')}</div>
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t('home.projects.title')}</h2>
+        <span class="text-ui text-muted-foreground">{t('home.projects.count')}</span>
       </div>
-
       <div class="mt-10 grid gap-5 sm:grid-cols-2">
-        {projects.map((project, i) => <ProjectCard project={project} index={i + 1} lang={lang} />)}
+        {projects.map((project) => <ProjectCard project={project} lang={lang} />)}
       </div>
     </div>
   </section>
 
-  <!-- WHY US -->
-  <section class="border-t border-line">
+  <section class="border-t border-border">
     <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <div class="text-xs text-muted"><span class="text-phosphor">~</span>/why</div>
-      <h2 class="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
-        <span class="text-phosphor">##</span> {t('home.why.title')}
-      </h2>
+      <h2 class="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t('home.why.title')}</h2>
       <div class="mt-10 grid gap-5 sm:grid-cols-3">
-        {
-          whyItems.map((item, i) => (
-            <div class="rounded-lg border border-line bg-panel p-5">
-              <div class="text-xs text-dim">[{String(i + 1).padStart(2, '0')}]</div>
-              <h3 class="mt-2 font-display text-base font-bold text-white">
-                {item.title}
-              </h3>
-              <p class="mt-2 text-xs leading-6 text-muted">{item.desc}</p>
-            </div>
-          ))
-        }
+        {whyItems.map((item, i) => (
+          <Card variant="outline">
+            <CardHeader>
+              <span class="font-mono text-ui-sm text-muted-foreground">{String(i + 1).padStart(2, '0')}</span>
+              <CardTitle>{item.title}</CardTitle>
+              <CardDescription>{item.desc}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- MANIFESTO STRIP -->
-  <section class="border-t border-line">
-    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-      <div class="rounded-lg border border-dashed border-line-bright p-6 sm:p-8">
-        <div class="text-xs text-dim">{t('home.manifesto.label')}</div>
-        <p class="mt-4 max-w-3xl text-sm leading-8 text-fg">
-          {t('home.manifesto.p1')}<span class="text-phosphor">{t('home.manifesto.cmd1')}</span>{t('home.manifesto.p2')}<span class="text-phosphor">{t('home.manifesto.cmd2')}</span>{t('home.manifesto.p3')}<span class="text-phosphor">{t('home.manifesto.cmd3')}</span>{t('home.manifesto.p4')}
-        </p>
-        <div class="mt-6 text-xs text-muted">
-          <span class="text-phosphor">$</span> cat /etc/motd —— "{t('home.motd')}"
+  <section class="border-t border-border">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+      <Card variant="inset">
+        <div data-slot="card-panel" class="flex flex-col gap-6 rounded-inner bg-card p-6 shadow-raised sm:p-10">
+          <span class="text-ui-sm font-medium text-muted-foreground">{t('home.manifesto.label')}</span>
+          <p class="max-w-3xl text-lg leading-relaxed text-pretty">
+            {t('home.manifesto.p1')}<span class="font-medium text-primary">{t('home.manifesto.cmd1')}</span>{t('home.manifesto.p2')}<span class="font-medium text-primary">{t('home.manifesto.cmd2')}</span>{t('home.manifesto.p3')}<span class="font-medium text-primary">{t('home.manifesto.cmd3')}</span>{t('home.manifesto.p4')}
+          </p>
+          <figure class="flex items-center gap-3 border-t border-border pt-6">
+            <Logo size={28} class="shrink-0 text-foreground" />
+            <blockquote class="font-serif text-lg italic">“{t('home.quote')}”</blockquote>
+            <figcaption class="ms-auto shrink-0 text-ui text-muted-foreground">— {t('home.quote.by')}</figcaption>
+          </figure>
         </div>
-      </div>
+      </Card>
     </div>
   </section>
 </Base>

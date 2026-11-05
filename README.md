@@ -1,6 +1,6 @@
 # taimatsu
 
-> ▲ 独立开发者实验室官网 —— 黑底极客风格，基于 [Astro](https://astro.build) 构建。
+> 独立开发者实验室官网，基于 [Astro](https://astro.build) 与 [PaneUI](https://paneui.dev) 构建。
 
 介绍以下项目：
 
@@ -15,6 +15,8 @@
 
 - [Astro 7](https://astro.build) —— 静态站点生成（内置 i18n 路由：英文默认 `/`，中文 `/zh`）
 - [Tailwind CSS 4](https://tailwindcss.com) —— 样式（`@tailwindcss/vite`）
+- [PaneUI](https://paneui.dev) —— 组件与主题（`components.json` 注册了 `@paneui`，源码在 `src/components/ui`），橙色强调色，亮/暗主题跟随系统并可切换
+- React 19（`@astrojs/react`）—— 组件默认静态渲染，仅主题切换与命令复制按需水合
 - Astro Content Collections —— Blog（Markdown，按语言分目录）
 - [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) —— 站点地图
 
@@ -36,7 +38,9 @@ npm run preview
 
 ```
 src/
-├── components/       # Nav / Footer / ProjectCard / pages（双语共享页面组件）
+├── app/              # PaneUI 字体与长文排版（fonts.css / typeset.css）
+├── components/       # Nav / Footer / ProjectCard / Logo / pages；ui/ 为 PaneUI 组件
+├── lib/utils.ts
 ├── content/blog/     # 博客文章（zh/ 中文，en/ 英文）
 ├── content.config.ts
 ├── data/projects.ts  # 项目数据（双语）
@@ -45,6 +49,11 @@ src/
 ├── pages/            # 英文页面（根路径）+ zh/ 中文页面
 └── styles/global.css
 ```
+
+## 品牌
+
+- 标志：圆太阳与底部弯曲条纹，单色。内联版本见 `src/components/Logo.astro`（跟随文字颜色）。
+- `public/brand/`：白底黑标、黑底白标（SVG / PNG）与透明底单色标；`favicon.svg` 随系统亮暗切换。
 
 ## 多语言
 

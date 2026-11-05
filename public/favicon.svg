@@ -1,4 +1,2 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#050505"/>
-  <path d="M16 6 L24 24 L20 24 L16 13 L12 24 L8 24 Z" fill="#00ff9d"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 824 824"><style>.bg{fill:#fff}.fg{fill:#111}@media (prefers-color-scheme: dark){.bg{fill:#111}.fg{fill:#fff}}</style><defs><clipPath id="b"><path d="M40 -166 Q256 -234 472 -166 L472 304 Q256 236 40 304 Z"/><path d="M40 320 Q256 252 472 320 L472 346 Q256 278 40 346 Z"/><path d="M40 360 Q256 292 472 360 L472 380 Q256 312 40 380 Z"/><path d="M40 392 Q256 324 472 392 L472 406 Q256 338 40 406 Z"/><path d="M40 418 Q256 350 472 418 L472 428 Q256 360 40 428 Z"/></clipPath></defs><rect x="100" y="100" width="824" height="824" rx="185" class="bg"/>
+<g transform="translate(512,512) scale(1.7) translate(-256,-262)"><circle cx="256" cy="250" r="166" class="fg" clip-path="url(#b)"/></g></svg>
