@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getThemeScript } from '../components/ui/theme-toggle';
 import { alternateLocalePath, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -21,17 +22,20 @@ const fullTitle = title === 'taimatsu' ? 'taimatsu — build. deploy. ship.' : `
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 const zhUrl = new URL(alternateLocalePath(Astro.url.pathname, 'zh'), Astro.site ?? Astro.url.origin);
 const enUrl = new URL(alternateLocalePath(Astro.url.pathname, 'en'), Astro.site ?? Astro.url.origin);
+const ogImage = new URL('/brand/taimatsu-dark.png', Astro.site ?? Astro.url.origin);
 ---
 
 <!doctype html>
-<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'} data-accent="orange">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
@@ -40,8 +44,10 @@ const enUrl = new URL(alternateLocalePath(Astro.url.pathname, 'en'), Astro.site 
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
     <title>{fullTitle}</title>
+    <script is:inline set:html={getThemeScript()} />
     <script is:inline>
       // 语言自动切换：仅在用户未手动选择过时，根据浏览器语言跳转中文版
       (function () {
@@ -57,7 +63,7 @@ const enUrl = new URL(alternateLocalePath(Astro.url.pathname, 'en'), Astro.site 
       })();
     </script>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col bg-background text-foreground antialiased">
     <Nav lang={lang} />
     <main class="flex-1">
       <slot />

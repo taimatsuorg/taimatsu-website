@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { Badge } from '../ui/badge';
+import { cardVariants } from '../ui/card';
+import { ArrowRightIcon } from '../icons';
 import { localePath, useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
@@ -29,45 +32,27 @@ function slug(id: string) {
     ? 'taimatsu 的开发日志 —— 构建笔记、发布记录与碎碎念。'
     : 'taimatsu build log —— notes, releases and rants.'}
 >
-  <section class="relative overflow-hidden">
-    <div class="grid-bg absolute inset-0"></div>
-    <div class="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
-      <div class="text-xs text-muted"><span class="text-phosphor">~</span>/blog</div>
-      <h1 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
-        <span class="text-phosphor">#</span> {t('blog.title')}
-      </h1>
-      <p class="mt-4 text-sm text-muted">{t('blog.subtitle')}</p>
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+    <h1 class="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">{t('blog.title')}</h1>
+    <p class="mt-4 text-base leading-relaxed text-muted-foreground">{t('blog.subtitle')}</p>
 
-      <div class="mt-12 space-y-4">
-        {
-          posts.length === 0 && (
-            <div class="rounded-lg border border-dashed border-line-bright p-8 text-center text-sm text-muted">
-              <span class="text-phosphor">$</span> {t('blog.empty')}
-            </div>
-          )
-        }
-        {
-          posts.map((post, i) => (
-            <a
-              href={localePath(lang, `/blog/${slug(post.id)}`)}
-              class="card-hover group block rounded-lg border border-line bg-panel p-5"
-            >
-              <div class="flex items-center gap-3 text-xs text-dim">
-                <span>[{String(posts.length - i).padStart(3, '0')}]</span>
-                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-                {post.data.tags.map((tag) => (
-                  <span class="rounded border border-line px-1.5 py-0.5 text-[10px] text-muted">#{tag}</span>
-                ))}
-              </div>
-              <h2 class="mt-2 font-display text-lg font-bold text-white transition-colors group-hover:text-phosphor">
-                {post.data.title}
-              </h2>
-              <p class="mt-2 text-sm leading-6 text-muted">{post.data.description}</p>
-              <div class="mt-3 text-xs text-phosphor-dim">{t('blog.readMore')}</div>
-            </a>
-          ))
-        }
-      </div>
+    <div class="mt-12 flex flex-col gap-4">
+      {posts.length === 0 && (
+        <div class="rounded-xl p-8 text-center text-ui text-muted-foreground shadow-[inset_0_0_0_1px_var(--border)]">{t('blog.empty')}</div>
+      )}
+      {posts.map((post) => (
+        <a href={localePath(lang, `/blog/${slug(post.id)}`)} class={cardVariants({ interactive: true, className: 'px-5' })}>
+          <div class="flex flex-wrap items-center gap-2 text-ui-sm text-muted-foreground">
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+            {post.data.tags.map((tag) => <Badge variant="outline" size="sm">{tag}</Badge>)}
+          </div>
+          <h2 class="font-heading text-lg font-semibold">{post.data.title}</h2>
+          <p class="text-ui leading-relaxed text-muted-foreground">{post.data.description}</p>
+          <span class="inline-flex items-center gap-1 text-ui font-medium text-primary">
+            {t('blog.readMore')} <ArrowRightIcon size={14} className="rtl:-scale-x-100" />
+          </span>
+        </a>
+      ))}
     </div>
   </section>
 </Base>
